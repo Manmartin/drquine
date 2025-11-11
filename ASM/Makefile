@@ -1,5 +1,6 @@
 COLLEEN = Colleen
 GRACE = Grace
+SULLY = Sully
 
 RM = rm -rf
 
@@ -9,16 +10,19 @@ CFLAGS = -Wall -Wextra -Werror -no-pie
 NASM            =   nasm
 NASMFLAGS       =   -f elf64
 
-SRCS_COLLEEN = colleen.s
+SRCS_COLLEEN = Colleen.s
 OBJS_COLLEEN = $(SRCS_COLLEEN:.s=.o)
 
-SRCS_GRACE = grace.s
+SRCS_GRACE = Grace.s
 OBJS_GRACE = $(SRCS_GRACE:.s=.o)
+
+SRCS_SULLY = Sully.s
+OBJS_SULLY = $(SRCS_SULLY:.s=.o)
 
 %.o: %.s
 	$(NASM) $(NASMFLAGS) $< -o $@
 
-all: $(COLLEEN) $(GRACE)
+all: $(COLLEEN) $(GRACE) $(SULLY)
 
 $(COLLEEN): $(OBJS_COLLEEN)
 	$(CC) $(CFLAGS) -o $@ $<
@@ -26,13 +30,15 @@ $(COLLEEN): $(OBJS_COLLEEN)
 $(GRACE):  $(OBJS_GRACE)
 	$(CC) $(CFLAGS) -o $@ $^
 
+$(SULLY):  $(OBJS_SULLY)
+	$(CC) $(CFLAGS) -o $@ $^
+
 clean:
-	$(RM) $(OBJS_COLLEEN)
-	$(RM) $(OBJS_GRACE)
+	$(RM) $(OBJS_COLLEEN) $(OBJS_GRACE) $(OBJS_SULLY)
+	$(RM)
 
 fclean: clean
-	$(RM) $(COLLEEN)
-	$(RM) $(GRACE)
+	$(RM) $(COLLEEN) $(GRACE) $(SULLY)
 
 re: fclean all
 
