@@ -39,6 +39,9 @@ elif [ "$mode" = "-ca" ]; then # Colleen in ASM
 elif [ "$mode" = "-ga" ]; then # Grace in ASM
     string="\"$(cat $file | sed -e 's/%/%%/g' | sed -r 's/\%define STR ".*"/%define STR %2$c%3$s%2$c/' | sed -e 's/"/%2$c/g' | sed -e 's/$/%1$c/' | tr -d '\n')\""
     sed -i "s|\%define STR \".*\"|%define STR $string|" $file
+elif [ "$mode" = "-sa" ]; then # Sully in ASM
+    string="\"$(cat $file | sed -e 's/%/%%/g' | sed -r 's/str: db ".*"/str: db %2$c%3$s%2$c/' | sed -e 's/\%define i .*$/%define i %4$i/' | sed -e 's/"/%2$c/g' | sed -e 's/$/%1$c/' | tr -d '\n')\""
+    sed -i "s|str: db \".*\"|str: db $string|" $file
 else
     echo "quine: invalid option $mode"
     exit 1

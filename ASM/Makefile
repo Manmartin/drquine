@@ -35,7 +35,6 @@ $(SULLY):  $(OBJS_SULLY)
 
 clean:
 	$(RM) $(OBJS_COLLEEN) $(OBJS_GRACE) $(OBJS_SULLY)
-	$(RM)
 
 fclean: clean
 	$(RM) $(COLLEEN) $(GRACE) $(SULLY)
